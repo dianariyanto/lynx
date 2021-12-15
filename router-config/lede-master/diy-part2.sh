@@ -8,8 +8,8 @@
 
 # ------------------------------- Main source started -------------------------------
 #
-# Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
-sed -i 's/luci-theme-bootstrap/luci-theme-material/g' ./feeds/luci/collections/luci/Makefile
+# Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-netgear）
+sed -i 's/luci-theme-bootstrap/luci-theme-netgear/g' ./feeds/luci/collections/luci/Makefile
 
 # autocore support for armvirt
 sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
