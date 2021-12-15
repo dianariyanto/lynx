@@ -8,7 +8,6 @@
 
 # ------------------------------- Main source started -------------------------------
 #
-rm -rf package/lean/luci-theme-netgear/
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-netgear）
 sed -i 's/luci-theme-bootstrap/luci-theme-netgear/g' ./feeds/luci/collections/luci/Makefile
 
