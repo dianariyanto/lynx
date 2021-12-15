@@ -5,6 +5,8 @@
 # Function: Diy script (Before Update feeds, Modify the default IP, hostname, theme, add/remove software packages, etc.)
 # Source code repository: https://github.com/coolsnowwolf/lede / Branch: master
 #========================================================================================================================
+# custom feed
+sed -i '$a src-git https://github.com/lynxnexy/netgear.git' feeds.conf.default
 
 # Uncomment a feed source
 # sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
