@@ -9,7 +9,7 @@
 # ------------------------------- Main source started -------------------------------
 #
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-netgear）
-sed -i 's/+luci-theme-bootstrap //g' ./feeds/luci/collections/luci/Makefile
+sed -i 's/luci-theme-bootstrap/luci-theme-netgear/g' ./feeds/luci/collections/luci/Makefile
 
 # autocore support for armvirt
 sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
@@ -63,7 +63,7 @@ pushd package/openwrt-openclash/tools/po2lmo && make && sudo make install 2>/dev
 
 #add luci-theme-netgear
 rm -rf package/lean/luci-theme-netgear/
-svn co https://github.com/lynxnexy/luci-theme-netgear package/luci-theme-netgear
+git clone https://github.com/lynxnexy/luci-theme-netgear feeds/luci/themes/luci-theme-netgear
 
 # luci-theme-argon
 # git clone https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
