@@ -8,6 +8,7 @@
 
 # ------------------------------- Main source started -------------------------------
 #
+rm -rf package/lean/luci-theme-netgear/
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-netgear）
 sed -i 's/luci-theme-bootstrap/luci-theme-netgear/g' ./feeds/luci/collections/luci/Makefile
 
@@ -62,8 +63,8 @@ svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/o
 pushd package/openwrt-openclash/tools/po2lmo && make && sudo make install 2>/dev/null && popd
 
 #add luci-theme-netgear
-rm -rf package/lean/luci-theme-netgear/
-git clone https://github.com/lynxnexy/luci-theme-netgear feeds/luci/themes/luci-theme-netgear
+# rm -rf package/lean/luci-theme-netgear/
+# git clone https://github.com/lynxnexy/luci-theme-netgear feeds/luci/themes/luci-theme-netgear
 
 # luci-theme-argon
 # git clone https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
