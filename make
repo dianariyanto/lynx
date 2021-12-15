@@ -305,7 +305,7 @@ EOF
     if [[ -d "${cpustat_file}" && -x "bin/bash" && "${DISTRIB_SOURCECODE}" == "lede" ]]; then
         cp -f ${cpustat_file}/cpustat usr/bin/cpustat && chmod +x usr/bin/cpustat >/dev/null 2>&1
         cp -f ${cpustat_file}/getcpu bin/getcpu && chmod +x bin/getcpu >/dev/null 2>&1
-        cp -f ${cpustat_file}/30-sysinfo.sh etc/profile.d/30-sysinfo.sh >/dev/null 2>&1
+        cp -f ${cpustat_file}/30-sysinfo.sh etc/profile.d/30-sysinfo.sh && chmod +x etc/profile.d/30-sysinfo.sh >/dev/null 2>&1
         sed -i "s/\/bin\/ash/\/bin\/bash/" etc/passwd >/dev/null 2>&1
         sed -i "s/\/bin\/ash/\/bin\/bash/" usr/libexec/login.sh >/dev/null 2>&1
     fi
@@ -322,6 +322,24 @@ EOF
         sed -i "/exit/i\/usr/sbin/balethirq.pl" etc/rc.local >/dev/null 2>&1
         cp -f ${balethirq_file}/balance_irq etc/balance_irq >/dev/null 2>&1
     fi
+    
+    # Add sstp
+    sstp_file=${configfiles_path}/patches/sstp
+    if [ -d "${sstp_file}" ]; then
+        cp -f ${sstp_file}/admin_network/proto_sstp.lua usr/lib/lua/luci/model/cbi/admin_network/proto_sstp.lua >/dev/null 2>&1
+        cp -f ${sstp_file}/network/proto_sstp.lua usr/lib/lua/luci/model/network/proto_sstp.lua >/dev/null 2>&1
+    fi
+    
+    # Add speedtest
+    speedtest_file=${configfiles_path}/patches/speedtest
+    if [ -d "${speedtest_file}" ]; then
+        cp -f ${speedtest_file}/speedtest usr/bin/speedtest && chmod +x usr/bin/speedtest >/dev/null 2>&1
+    fi
+    
+    # Fix 3ginfo
+    chmod +x etc/init.d/3ginfo >/dev/null 2>&1
+    chmod +x usr/share/3ginfo/scripts/* >/dev/null 2>&1
+    chmod +x usr/share/3ginfo/cgi-bin/* >/dev/null 2>&1
 
     # Add firmware information to the etc/flippy-openwrt-release
     echo "FDTFILE='${FDTFILE}'" >>etc/flippy-openwrt-release 2>/dev/null
@@ -334,16 +352,16 @@ EOF
     echo "K510='${K510}'" >>etc/flippy-openwrt-release 2>/dev/null
 
     # Add firmware version information to the terminal page
-    if [ -f etc/banner ]; then
-        op_version=$(echo $(ls lib/modules/ 2>/dev/null))
-        op_packaged_date=$(date +%Y-%m-%d)
-        echo " Install: OpenWrt → System → Amlogic Service → Install" >>etc/banner
-        echo " Update: OpenWrt → System → Amlogic Service → Update" >>etc/banner
-        echo " Amlogic SoC: ${build_op}" >>etc/banner
-        echo " OpenWrt Kernel: ${op_version}" >>etc/banner
-        echo " Packaged Date: ${op_packaged_date}" >>etc/banner
-        echo " -----------------------------------------------------" >>etc/banner
-    fi
+    # if [ -f etc/banner ]; then
+    #    op_version=$(echo $(ls lib/modules/ 2>/dev/null))
+    #    op_packaged_date=$(date +%Y-%m-%d)
+    #    echo " Install: OpenWrt → System → Amlogic Service → Install" >>etc/banner
+    #    echo " Update: OpenWrt → System → Amlogic Service → Update" >>etc/banner
+    #    echo " Amlogic SoC: ${build_op}" >>etc/banner
+    #    echo " OpenWrt Kernel: ${op_version}" >>etc/banner
+    #    echo " Packaged Date: ${op_packaged_date}" >>etc/banner
+    #    echo " -----------------------------------------------------" >>etc/banner
+    # fi
 
     # Add some package and script connection
     ln -sf /usr/sbin/openwrt-backup usr/sbin/flippy 2>/dev/null
