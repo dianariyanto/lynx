@@ -337,9 +337,9 @@ EOF
     fi
     
     # Fix 3ginfo
-    chmod +x etc/init.d/3ginfo >/dev/null 2>&1
-    chmod +x usr/share/3ginfo/scripts/* >/dev/null 2>&1
-    chmod +x usr/share/3ginfo/cgi-bin/* >/dev/null 2>&1
+    # chmod +x etc/init.d/3ginfo >/dev/null 2>&1
+    # chmod +x usr/share/3ginfo/scripts/* >/dev/null 2>&1
+    # chmod +x usr/share/3ginfo/cgi-bin/* >/dev/null 2>&1
 
     # Add firmware information to the etc/flippy-openwrt-release
     echo "FDTFILE='${FDTFILE}'" >>etc/flippy-openwrt-release 2>/dev/null
