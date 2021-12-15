@@ -61,6 +61,10 @@ svn co https://github.com/xiaorouji/openwrt-passwall/trunk package/openwrt-passw
 svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/openwrt-openclash
 pushd package/openwrt-openclash/tools/po2lmo && make && sudo make install 2>/dev/null && popd
 
+#add luci-theme-netgear
+rm -rf package/lean/luci-theme-netgear/
+svn co https://github.com/lynxnexy/luci-theme-netgear package/luci-theme-netgear
+
 # luci-theme-argon
 # git clone https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
 # rm -rf package/lean/luci-theme-argon/
