@@ -21,8 +21,8 @@ echo "DISTRIB_SOURCECODE='lede'" >>package/base-files/files/etc/openwrt_release
 # Modify default IP（FROM 192.168.1.1 CHANGE TO 192.168.31.4）
 # sed -i 's/192.168.1.1/192.168.31.4/g' package/base-files/files/bin/config_generate
 
-# Modify default root's password（FROM 'password'[$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.] CHANGE TO 'passwd'）
-sed -i "s/root::0:0:99999:7:::/root:$1$itShnP4Q$.BHxTSYPbx1sj5UZsZX441:0:0:99999:7:::/g" /etc/shadow
+# Modify default root's password（FROM 'password'[$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.] CHANGE TO 'your password'）
+sed -i "s/root::0:0:99999:7:::/root:"'$'"1"'$'"itShnP4Q"'$'".BHxTSYPbx1sj5UZsZX441:0:0:99999:7:::/g" package/base-files/files/etc/shadow
 
 # language
 sed -i "s/zh_cn/en/g" feeds/luci/modules/luci-base/root/etc/uci-defaults/luci-base
