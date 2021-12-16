@@ -32,6 +32,8 @@ sed -i "s/CST-8/WIB-7/g" package/lean/default-settings/files/zzz-default-setting
 sed -i "s/Shanghai/Jakarta/g" package/lean/default-settings/files/zzz-default-settings
 # user firwall
 sed -i -e "40s/echo '/echo '# /g" -e "41s/echo '/echo '# /g" -e "42s/echo '/echo '# /g" -e "43s/echo '/echo '# /g" package/lean/default-settings/files/zzz-default-settings
+# rc local
+sed -i "3s|^|\n# Mount Filesystem NTFS\n# sleep 1\n# ntfs-3g /dev/sda1 /mnt/hdd -o rw,lazytime,noatime,big_writes\n# exit 0\n|" package/base-files/files/etc/rc.local
 # hsotname
 sed -i "s/OpenWrt/LYNX/g" package/base-files/files/bin/config_generate
 # default shell to zsh
