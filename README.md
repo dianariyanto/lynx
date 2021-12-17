@@ -1,2 +1,1 @@
-# lynx
-OpenWrt for Amlogic HG680-P & B860H
+#OpenWrt for HG680-P & B860H
