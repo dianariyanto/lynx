@@ -1,1 +1,2 @@
-#OpenWrt for HG680-P & B860H
+#lynx
+OpenWrt for HG680-P & B860H
