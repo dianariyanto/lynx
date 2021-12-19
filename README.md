@@ -3,12 +3,12 @@
 
 |Firmware information
 |--------------------------------------------------------------
-|Default IP       : 192.168.1.1
+|Default IP : 192.168.1.1
 |Default username : root
 |Default password : passwd
-|WiFi SSID        : LYNX
-|WiFi Password  	: none
-|Install to EMMC  : Login to OpenWrt → System → Amlogic Service → Install OpenWrt
+|WiFi SSID : LYNX
+|WiFi Password : none
+|Install to EMMC : Login to OpenWrt → System → Amlogic Service → Install OpenWrt
 
 
 ## Overviews
