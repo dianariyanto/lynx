@@ -171,9 +171,9 @@ detect_mac80211() {
 			set wireless.radio${devidx}=wifi-device
 			set wireless.radio${devidx}.type=mac80211
 			${dev_id}
-			set wireless.radio${devidx}.channel=${channel}
+			set wireless.radio${devidx}.channel=11
 			set wireless.radio${devidx}.band=${mode_band}
-			set wireless.radio${devidx}.htmode=$htmode
+			set wireless.radio${devidx}.htmode=HT40
 			set wireless.radio${devidx}.country=ID
 			
 			set wireless.default_radio${devidx}=wifi-iface
