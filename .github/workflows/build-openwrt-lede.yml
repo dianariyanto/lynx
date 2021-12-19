@@ -140,7 +140,7 @@ jobs:
         [ -d openwrt-armvirt ] || mkdir -p openwrt-armvirt
         cp -f openwrt/bin/targets/*/*/*.tar.gz openwrt-armvirt/ && sync
         sudo chmod +x make
-        sudo ./make -d -b s905x -k 5.10.80_5.4.160
+        sudo ./make -d -b s905x -k 5.10.5 -a false
         [ -d ipk ] || mkdir -p ipk
         cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ipk/ && sync
         sudo tar -czf ipk.tar.gz ipk && mv -f ipk.tar.gz out/ && sync
@@ -182,5 +182,7 @@ jobs:
           Default IP: 192.168.1.1
           Default username: root
           Default password: passwd
+          WiFi SSID       : LYNX
+          WiFi Password   : none
           Install to EMMC: Login to OpenWrt → System → Amlogic Service → Install OpenWrt
 
