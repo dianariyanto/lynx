@@ -294,11 +294,24 @@ EOF
 
     # Add drivers
     [ -f etc/modules.d/rtl8189fs ] || echo "rtl8189fs" > etc/modules.d/rtl8189fs
-    [ -f etc/modules.d/rtl8189es ] || echo "rtl8189es" > etc/modules.d/rtl8189es
+    [ -f etc/modules.d/rtl8189fs ] || echo "rtl8189es" > etc/modules.d/rtl8189es
     [ -f etc/modules.d/rtl8188fu ] || echo "rtl8188fu" > etc/modules.d/rtl8188fu
     [ -f etc/modules.d/usb-net-rtl8150 ] || echo "rtl8150" > etc/modules.d/usb-net-rtl8150
     [ -f etc/modules.d/usb-net-rtl8152 ] || echo "r8152" > etc/modules.d/usb-net-rtl8152
     [ -f etc/modules.d/usb-net-asix-ax88179 ] || echo "ax88179_178a" > etc/modules.d/usb-net-asix-ax88179
+    
+    # Patch drivers wireless
+    netifd_file=${configfiles_path}/patches/wireless/drivers/netifd
+    if [ -d "${netifd_file}" ];then
+        cp -f ${netifd_file}/mac80211.sh lib/netifd/wireless/mac80211.sh && chmod +x lib/netifd/wireless/mac80211.sh >/dev/null 2>&1
+        sync
+    fi
+
+    wifi_file=${configfiles_path}/patches/wireless/drivers/amlogic/wifi
+    if [ -d "${wifi_file}" ];then
+        cp -f ${wifi_file}/mac80211.sh lib/wifi/mac80211.sh && chmod +x lib/wifi/mac80211.sh >/dev/null 2>&1
+        sync
+    fi
     
     # Add cpustat
     DISTRIB_SOURCECODE="$(cat etc/openwrt_release | grep "DISTRIB_SOURCECODE=" | awk -F "'" '{print $2}')"
