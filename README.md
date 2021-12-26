@@ -23,4 +23,4 @@
 - [Lienol](https://github.com/Lienol/openwrt)
 - [unifreq](https://github.com/unifreq/openwrt_packit)
 - [ophub](https://github.com/ophub/amlogic-s9xxx-openwrt)
-- [sibondt](https://facebook.com/sibondt) for Kernel
+- [sibondt](https://facebook.com/sibondt) & [raditbh](https://t.me/radityabh) for Kernel
