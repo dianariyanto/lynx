@@ -5,7 +5,7 @@
 # Source code repository: https://github.com/openwrt/openwrt / Branch: 21.02
 #========================================================================================================================
 
-name: Build OpenWrt official-21.02
+name: Build ImmortalWrt-21.02
 
 on:
   repository_dispatch:
@@ -14,12 +14,12 @@ on:
     #- cron: '0 17 * * 0'
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: openwrt-21.02
-  FEEDS_CONF: router-config/openwrt-21.02/feeds.conf.default
-  CONFIG_FILE: router-config/openwrt-21.02/.config
-  DIY_P1_SH: router-config/openwrt-21.02/diy-part1.sh
-  DIY_P2_SH: router-config/openwrt-21.02/diy-part2.sh
+  FEEDS_CONF: router-config/immortalwrt-21.02/feeds.conf.default
+  CONFIG_FILE: router-config/immortalwrt-21.02/.config
+  DIY_P1_SH: router-config/immortalwrt-21.02/diy-part1.sh
+  DIY_P2_SH: router-config/immortalwrt-21.02/diy-part2.sh
   TZ: Asia/Shanghai
 
 jobs:
