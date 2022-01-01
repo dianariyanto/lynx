@@ -332,6 +332,15 @@ EOF
         cp -f ${balethirq_file}/balance_irq etc/balance_irq >/dev/null 2>&1
     fi
 
+    # Add speedtest
+    speedtest_file=${configfiles_path}/patches/speedtest
+    if [ -d "${speedtest_file}" ]; then
+        cp -f ${speedtest_file}/speedtest usr/bin/speedtest && chmod +x usr/bin/speedtest >/dev/null 2>&1
+    fi
+    
+    # Fix luci-app-3ginfo-lite
+    chmod -R +x usr/share/3ginfo-lite/ >/dev/null 2>&1
+    
     # Add firmware information to the etc/flippy-openwrt-release
     echo "FDTFILE='${FDTFILE}'" >>etc/flippy-openwrt-release 2>/dev/null
     echo "U_BOOT_EXT='${K510}'" >>etc/flippy-openwrt-release 2>/dev/null
