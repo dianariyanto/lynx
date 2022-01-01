@@ -9,9 +9,9 @@ THIS_SCRIPT="sysinfo"
 MOTD_DISABLE=""
 
 SHOW_IP_PATTERN="^[ewr].*|^br.*|^lt.*|^umts.*"
-
 DATA_STORAGE=/userdisk/data
 MEDIA_STORAGE=/userdisk/snail
+EXT_STORAGE=/mnt/hdd
 
 [[ -f /etc/default/motd ]] && . /etc/default/motd
 for f in $MOTD_DISABLE; do
@@ -78,11 +78,18 @@ function storage_info() {
 		data_usage=$(awk '/\// {print $(NF-1)}' <<<${StorageInfo} | sed 's/%//g')
 		data_total=$(awk '/\// {print $(NF-4)}' <<<${StorageInfo})
 	fi
+	
+	StorageInfo=$(df -h $EXT_STORAGE 2>/dev/null | grep $EXT_STORAGE)
+	if [[ -n "${StorageInfo}" && ${RootInfo} != *$EXT_STORAGE* ]]; then
+		hdd_usage=$(awk '/\// {print $(NF-1)}' <<<${StorageInfo} | sed 's/%//g')
+		hdd_total=$(awk '/\// {print $(NF-4)}' <<<${StorageInfo})
+	fi	
+	
 } # storage_info
 
 function get_data_storage() {
 	if which lsblk >/dev/null; then
-		root_name=$(lsblk -l -o NAME,MOUNTPOINT | awk '$2~/^\/$/ {print $1'})
+		root_name=$(lsblk -l -o NAME,MOUNTPOINT | awk '$2~/^\/$/ {print $1}')
 		mmc_name=$(echo $root_name | awk '{print substr($1,1,length($1)-2);}')
 		if echo $mmc_name | grep mmcblk >/dev/null; then
 			DATA_STORAGE="/mnt/${mmc_name}p4"
@@ -149,39 +156,47 @@ sys_tempx=$(echo $sys_temp | sed 's/ / /g')
 # display info
 
 machine_model=$(cat /proc/device-tree/model | tr -d "\000")
-echo -e " Device Model: \033[93m${machine_model}\033[0m"
-printf " Architecture: \x1B[93m%s\x1B[0m" "$sys_tempx"
+echo -e " Device Model	: \033[93m${machine_model}\033[0m"
+printf " Architecture	: \x1B[93m%s\x1B[0m" "$sys_tempx"
 echo ""
-display " Load Average" "${load%% *}" "${critical_load}" "0" "" "${load#* }"
-printf "Uptime:  \x1B[92m%s\x1B[0m\t\t" "$time"
+display " Load Average	" "${load%% *}" "${critical_load}" "0" "" "${load#* }"
+echo ""
+printf " Uptime		: \x1B[92m%s\x1B[0m\t\t" "$time"
 echo ""
 
-display " Ambient Temp" "$cpu_tempx" "60" "0" "" "°C"
+display " Ambient Temp	" "$cpu_tempx" "60" "0" "°C"
 if [ -x /usr/bin/cpustat ]; then
 	cpu_freq=$(/usr/bin/cpustat -F1500)
-	echo -n "Frequency:  $cpu_freq"
+echo ""
+	echo -n " Frequency	: $cpu_freq"
 else
 	display "Frequency" "$cpu_freq" "1500" "0" " Mhz" ""
 fi
 echo ""
 
-display " Memory Usage" "$memory_usage" "70" "0" "%" " of ${memory_total}MB"
-printf "IP Address:  \x1B[92m%s\x1B[0m" "$ip_address"
+display " Memory Usage	" "$memory_usage" "70" "0" "%" " of ${memory_total}MB"
+echo ""
+printf " IP Address	: \x1B[92m%s\x1B[0m" "$ip_address"
 #display "Swap Usage" "$swap_usage" "10" "0" "%" " of $swap_total""Mb"
 echo ""
 
-#echo "" # fixed newline
-
-display " Boot Storage" "$boot_usage" "90" "1" "%" " of $boot_total"
-display "SYS Storage" "$root_usage" "90" "1" "%" " of $root_total"
+#display " Boot Storage	" "$boot_usage" "90" "1" "%" " of $boot_total"
+#echo ""
+display " SYS Storage	" "$root_usage" "90" "1" "%" " of $root_total"
 echo ""
 
-if [ "$data_usage" != "" ]; then
-	display " Data Storage" "$data_usage" "90" "1" "%" " of $data_total"
+#if [ "$data_usage" != "" ]; then
+#	display " Data Storage" "$data_usage" "90" "1" "%" " of $data_total"
+#	echo ""
+#fi
+#if [ "$media_usage" != "" ]; then
+#	display " Data Storage" "$media_usage" "90" "1" "%" " of $media_total"
+#	echo ""
+#fi
+#echo ""
+
+if [ "$hdd_usage" != "" ]; then
+	display " Ext. Storage	" "$hdd_usage" "90" "1" "%" " of $hdd_total"
 	echo ""
 fi
-if [ "$media_usage" != "" ]; then
-	display " Data Storage" "$media_usage" "90" "1" "%" " of $media_total"
-	echo ""
-fi
-echo ""
+echo " -----------------------------------------------------"
