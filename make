@@ -426,7 +426,7 @@ EOF
 make_image() {
     cd ${make_path}
     build_op=${1}
-    build_image_file="${out_path}/Immortalwrt-21.02-${build_op}-k${kernel}-$(date +"%Y.%m.%d.%H%M").img"
+    build_image_file="${out_path}/ImmortalWrt-21.02-${build_op}-k${kernel}-$(date +"%Y.%m.%d.%H%M").img"
     rm -f ${build_image_file}
     sync
 
