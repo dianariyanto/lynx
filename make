@@ -352,16 +352,16 @@ EOF
     echo "K510='${K510}'" >>etc/flippy-openwrt-release 2>/dev/null
 
     # Add firmware version information to the terminal page
-    if [ -f etc/banner ]; then
-        op_version=$(echo $(ls lib/modules/ 2>/dev/null))
-        op_packaged_date=$(date +%Y-%m-%d)
-        echo " Install: OpenWrt → System → Amlogic Service → Install" >>etc/banner
-        echo " Update: OpenWrt → System → Amlogic Service → Update" >>etc/banner
-        echo " Amlogic SoC: ${build_op}" >>etc/banner
-        echo " OpenWrt Kernel: ${op_version}" >>etc/banner
-        echo " Packaged Date: ${op_packaged_date}" >>etc/banner
-        echo " -----------------------------------------------------" >>etc/banner
-    fi
+    #if [ -f etc/banner ]; then
+    #    op_version=$(echo $(ls lib/modules/ 2>/dev/null))
+    #    op_packaged_date=$(date +%Y-%m-%d)
+    #    echo " Install: OpenWrt → System → Amlogic Service → Install" >>etc/banner
+    #    echo " Update: OpenWrt → System → Amlogic Service → Update" >>etc/banner
+    #    echo " Amlogic SoC: ${build_op}" >>etc/banner
+    #    echo " OpenWrt Kernel: ${op_version}" >>etc/banner
+    #    echo " Packaged Date: ${op_packaged_date}" >>etc/banner
+    #    echo " -----------------------------------------------------" >>etc/banner
+    #fi
 
     # Add some package and script connection
     ln -sf /usr/sbin/openwrt-backup usr/sbin/flippy 2>/dev/null
