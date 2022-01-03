@@ -8,8 +8,8 @@
 
 # ------------------------------- Main source started -------------------------------
 #
-# Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
-sed -i 's/luci-theme-bootstrap/luci-theme-material/g' feeds/luci/collections/luci/Makefile
+# Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-tano）
+sed -i 's/luci-theme-bootstrap/luci-theme-tano/g' feeds/luci/collections/luci/Makefile
 
 # change password
 sed -i "s/root::0:0:99999:7:::/root:"'$'"1"'$'"pSFNodTy"'$'"ej92Jju6QPD9AIAuelgnr.:18993:0:99999:7:::/g" package/base-files/files/etc/shadow
@@ -49,6 +49,9 @@ svn co https://github.com/hubutui/p7zip-lede/trunk package/lean/p7zip
 
 # Add luci-app-3ginfo-lite
 svn co https://github.com/4IceG/luci-app-3ginfo-lite/trunk package/luci-app-3ginfo-lite
+
+# Add luci-theme-tano
+svn co https://github.com/riyuejz/luci-theme-tano/trunk package/luci-theme-tano
 
 # oh-my-zsh
 mkdir -p files/root
